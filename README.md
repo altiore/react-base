@@ -17,17 +17,16 @@
 2. Necessary folder structure:
 ```
 +-- app
+|   +-- components
+|   +-- helpers
+|   +-- pages
+|   +-- store
+|   +-- styles
 |   +-- index.js
 +-- static
 |   +-- index.html
 +-- package.json
 ```
-.
-+-- app
-|   +-- index.js
-+-- static
-|   +-- index.html
-+-- package.json
 
 3. available commands:
   * `npm start`
