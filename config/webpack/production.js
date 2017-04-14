@@ -9,8 +9,6 @@ const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const paths = require('../paths');
 const Package = require(paths.appPackageJson);
-require('babel-polyfill')
-
 
 const commonConfig = require('./base');
 
@@ -27,6 +25,17 @@ module.exports = webpackMerge(commonConfig, {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            'resolve-url-loader',
+            'postcss-loader',
+          ],
+        }),
+      },
+      {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
@@ -39,6 +48,48 @@ module.exports = webpackMerge(commonConfig, {
                 config: resolve(__dirname, '..', './postcss.config.js'),
               },
             },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true,
+              }
+            }
+          ],
+        }),
+      },
+      {
+        test: /\.css2$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                importLoaders: 1,
+                localIdentName: '[hash:base64:5]',
+              },
+            },
+            'resolve-url-loader',
+            'postcss-loader',
+          ],
+        }),
+      },
+      {
+        test: /\.scss2$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                importLoaders: 1,
+                localIdentName: '[hash:base64:5]',
+              },
+            },
+            'resolve-url-loader',
+            'postcss-loader',
             {
               loader: 'sass-loader',
               options: {

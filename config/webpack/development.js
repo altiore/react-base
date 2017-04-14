@@ -50,6 +50,42 @@ module.exports = webpackMerge(commonConfig, {
           },
         ],
       },
+      {
+        test: /\.css2$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]__[hash:base64:5]',
+            },
+          },
+          'resolve-url-loader',
+        ],
+      },
+      {
+        test: /\.scss2$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]__[hash:base64:5]',
+            },
+          },
+          'resolve-url-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
