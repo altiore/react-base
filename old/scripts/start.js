@@ -3,8 +3,9 @@
 const { join, resolve } = require('path');
 const express = require('express');
 const webpack = require('webpack');
-const config = require('../config/webpack/development');
+const config = require('../webpack.config');
 
+process.env.NODE_ENV = 'development';
 const app = express();
 const compiler = webpack(config);
 const PORT = process.env.PORT || 8018;

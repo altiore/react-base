@@ -7,14 +7,17 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const Package = require('../../package');
+const paths = require('../paths');
+const Package = require(paths.appPackageJson);
+require('babel-polyfill')
+
 
 const commonConfig = require('./base');
 
 module.exports = webpackMerge(commonConfig, {
   entry: {
     index: [
-      resolve(__dirname, 'polyfills.js'),
+      require.resolve('babel-polyfill'),
       './index.js'
     ],
   },
@@ -64,7 +67,7 @@ module.exports = webpackMerge(commonConfig, {
     new HtmlWebpackPlugin({
       title: Package.title,
       inject: true,
-      template: resolve(__dirname, '..', '..', 'static', 'index.html'),
+      template: paths.appHtml,
       minify: {
         removeComments: true,
         collapseWhitespace: true,

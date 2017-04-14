@@ -1,15 +1,16 @@
 'use strict';
 
-const { resolve } = require('path');
+const { resolve, dirname } = require('path');
 const webpack = require('webpack');
-const Package = require('../../package');
+const baseDir = process.cwd();
+const Package = require(`${baseDir}/package`);
 
 module.exports = {
   name: Package.name,
-  context: resolve(__dirname, '..', '..', 'app'),
+  context: resolve(baseDir, 'app'),
   target: 'web',
   output: {
-    path: resolve(__dirname, '..', '..', 'admin'),
+    path: resolve(baseDir, 'dist'),
     filename: 'static/js/[name].[hash:8].js',
     chunkFilename: 'static/js/[name].[hash:8].chunk.js',
     publicPath: '/',
@@ -18,13 +19,13 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json', '.md', '.scss', '.css'],
     alias: {
-      components: resolve(__dirname, '..', '..', 'app', 'components'),
-      pages: resolve(__dirname, '..', '..', 'app', 'pages'),
-      data: resolve(__dirname, '..', '..', 'app', 'data'),
-      helpers: resolve(__dirname, '..', '..', 'app', 'helpers'),
-      static: resolve(__dirname, '..', '..', 'static'),
-      store: resolve(__dirname, '..', '..', 'app', 'store'),
-      styles: resolve(__dirname, '..', '..', 'app', 'components', 'styles'),
+      components: resolve(baseDir, 'app', 'components'),
+      pages: resolve(baseDir, 'app', 'pages'),
+      data: resolve(baseDir, 'app', 'data'),
+      helpers: resolve(baseDir, 'app', 'helpers'),
+      static: resolve(baseDir, 'static'),
+      store: resolve(baseDir, 'app', 'store'),
+      styles: resolve(baseDir, 'app', 'components', 'styles'),
     },
     modules: [
       'node_modules',

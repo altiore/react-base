@@ -1,9 +1,12 @@
-const { resolve } = require('path');
-const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const Package = require('../../package');
-const commonConfig = require('./base');
+const { resolve } = require('path')
+const webpack = require('webpack')
+const webpackMerge = require('webpack-merge')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const baseDir = process.cwd();
+const Package = require(`${baseDir}/package`);
+const commonConfig = require('./base')
+require('babel-polyfill')
+require('webpack-hot-middleware')
 
 module.exports = webpackMerge(commonConfig, {
   devtool: 'inline-source-map',
@@ -11,7 +14,7 @@ module.exports = webpackMerge(commonConfig, {
     index: [
       'react-hot-loader/patch',
       'webpack-hot-middleware/client',
-      resolve(__dirname, 'polyfills.js'),
+      'babel-polyfill',
       './index.js',
     ],
   },
@@ -21,7 +24,7 @@ module.exports = webpackMerge(commonConfig, {
         enforce: 'pre',
         test: /\.(js|jsx)$/,
         loader: 'eslint-loader',
-        include: resolve(__dirname, '..', '..', 'app'),
+        include: resolve(baseDir, 'app'),
         options: {
           useEslintrc: false,
           configFile: resolve(__dirname, '..', 'eslintConfig.js')
@@ -60,7 +63,7 @@ module.exports = webpackMerge(commonConfig, {
       title: Package.title,
       cache: true,
       showErrors: true,
-      template: resolve(__dirname, '..', '..', 'static', 'index.html'),
+      template: resolve(baseDir, 'static', 'index.html'),
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
@@ -73,7 +76,7 @@ module.exports = webpackMerge(commonConfig, {
   devServer: {
     hot: true,
     inline: true,
-    contentBase: resolve(__dirname, '..', '..', 'dist'),
+    contentBase: resolve(baseDir, 'dist'),
     publicPath: '/',
   },
 })
