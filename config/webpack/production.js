@@ -31,7 +31,12 @@ module.exports = webpackMerge(commonConfig, {
           use: [
             'css-loader',
             'resolve-url-loader',
-            'postcss-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                config: resolve(__dirname, '..', './postcss.config.js'),
+              },
+            },
           ],
         }),
       },
@@ -71,7 +76,12 @@ module.exports = webpackMerge(commonConfig, {
               },
             },
             'resolve-url-loader',
-            'postcss-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                config: resolve(__dirname, '..', './postcss.config.js'),
+              },
+            },
           ],
         }),
       },
@@ -89,7 +99,12 @@ module.exports = webpackMerge(commonConfig, {
               },
             },
             'resolve-url-loader',
-            'postcss-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                config: resolve(__dirname, '..', './postcss.config.js'),
+              },
+            },
             {
               loader: 'sass-loader',
               options: {
