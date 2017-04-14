@@ -15,7 +15,6 @@ const commonConfig = require('./base');
 module.exports = webpackMerge(commonConfig, {
   entry: {
     index: [
-      require.resolve('babel-polyfill'),
       './index.js'
     ],
   },
