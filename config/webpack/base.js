@@ -1,4 +1,5 @@
 'use strict';
+process.traceDeprecation = true
 
 const { resolve } = require('path');
 const webpack = require('webpack');
