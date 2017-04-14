@@ -1,6 +1,6 @@
 'use strict';
 
-const { join, resolve } = require('path');
+require('dotenv').config();
 const express = require('express');
 const webpack = require('webpack');
 const config = require('../config/webpack/development');
