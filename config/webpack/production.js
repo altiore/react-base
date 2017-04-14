@@ -15,6 +15,7 @@ const commonConfig = require('./base');
 module.exports = webpackMerge(commonConfig, {
   entry: {
     index: [
+      require.resolve('babel-polyfill'),
       './index.js'
     ],
   },
@@ -126,7 +127,7 @@ module.exports = webpackMerge(commonConfig, {
       }
     }),
     new InterpolateHtmlPlugin({
-      'NODE_ENV': process.env.NODE_ENV || 'development',
+      'NODE_ENV': process.env.NODE_ENV,
       'PUBLIC_URL': '/'
     }),
     new HtmlWebpackPlugin({
@@ -148,21 +149,14 @@ module.exports = webpackMerge(commonConfig, {
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        screw_ie8: true
-      },
-      output: {
-        comments: false,
-        screw_ie8: true
-      },
+      compress: true,
+      mangle: true,
+      sourceMap: false,
       beautify: false,
-      mangle: {
-        screw_ie8: true,
-        keep_fnames: true,
-      },
       comments: false,
       drop_console: true,
+      drop_debugger: true,
+      screw_ie8: false,
     }),
     new webpack.NoEmitOnErrorsPlugin(),
     new ExtractTextPlugin({
