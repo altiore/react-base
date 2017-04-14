@@ -26,6 +26,7 @@ module.exports = {
       static: resolve(paths.appPath, 'static'),
       store: resolve(paths.app, 'store'),
       styles: resolve(paths.app, 'styles'),
+      data: resolve(paths.app, 'data'),
     },
     modules: [
       'node_modules',
